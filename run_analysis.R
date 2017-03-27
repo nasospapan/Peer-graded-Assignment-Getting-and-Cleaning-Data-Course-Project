@@ -19,24 +19,27 @@ library(dplyr)
 library(data.table)
 library(plyr)
 
-# set the working directory for test set
-setwd("C:/Users/nasos/Desktop/Projects/Coursera Getting & Cleaning Data Johns Hopkins/UCI HAR Dataset/test")
+## Read files based on having the UCI HAR dataset file in your working directory
+urll<-"https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
+
+#destination zip
+destfile<-paste0(getwd(),"/","dataweek4.zip")
+
+#download zip file
+download.file(urll,destfile,method = curl)
+
+#unzip file
+unzip("dataweek4.zip",list = TRUE)
 
 # Read files for test set
-Xtest <- read.table(file = "X_test.txt")
-ytest <- read.table(file = "y_test.txt")
-subjecttest <- read.table(file = "subject_test.txt")
-
-# set the working directory for training set
-setwd("C:/Users/nasos/Desktop/Projects/Coursera Getting & Cleaning Data Johns Hopkins/UCI HAR Dataset/train")
+Xtest <- read.table(file = "./test/X_test.txt")
+ytest <- read.table(file = "./test/y_test.txt")
+subjecttest <- read.table(file = "./test/subject_test.txt")
 
 # Read files for training set
-Xtrain <- read.table(file = "X_train.txt")
-ytrain <- read.table(file = "y_train.txt")
-subjecttrain <- read.table(file = "subject_train.txt")
-
-# set the working directory for UCI HAR dataset
-setwd("C:/Users/nasos/Desktop/Projects/Coursera Getting & Cleaning Data Johns Hopkins/UCI HAR Dataset")
+Xtrain <- read.table(file = "./train/X_train.txt")
+ytrain <- read.table(file = "./train/y_train.txt")
+subjecttrain <- read.table(file = "./train/subject_train.txt")
 
 # Read files for features and activity_labels
 features <- read.table(file = "features.txt")
