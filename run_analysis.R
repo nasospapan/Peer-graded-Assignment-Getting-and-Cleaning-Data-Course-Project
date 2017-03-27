@@ -74,7 +74,7 @@ x <- X[,msind]
 # and create a new variable ydescr = descriptive activity name
 # basically ydescr has used the activity labels to match the activity numbers 
 # and has kept only the labels
-ydescr <- activitylabels[y[,1],2]
+activities <- activitylabels[y[,1],2]
 
 
 ##########################################################################
@@ -85,7 +85,7 @@ ydescr <- activitylabels[y[,1],2]
 names(x) <- features[msind,2]
 
 # name y
-names(ydescr) <- "activity"
+names(activities) <- "activity"
 
 # name subject
 names(subject) <- "subject"
@@ -94,7 +94,7 @@ names(subject) <- "subject"
 # Combine x y and subject into one dataset ##
 #############################################
 
-mydata <- cbind(ydescr, x, subject)
+mydata <- cbind(activities, x, subject)
 
 
 ###############################################################################
@@ -102,5 +102,5 @@ mydata <- cbind(ydescr, x, subject)
 #     with the average of each variable for each activity and each subject.   #
 ###############################################################################
 
-tidydata <- mydata %>% group_by(subject,ydescr) %>% summarise_all(mean)
+tidydata <- mydata %>% group_by(subject,activities) %>% summarise_all(mean)
 write.table(tidydata, "TidyData.txt", row.name=FALSE)
